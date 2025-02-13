@@ -56,7 +56,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 mt-3">
-                                                <a href="index.html" class="btn btn-primary text-uppercase">Sign In</a>
+                                                <a href="{{ route('admin.index') }}" class="btn btn-primary text-uppercase">Sign In</a>
                                             </div>
                                             <div class="col-12  mt-3">
                                                 <p>Don't have an account ?<a href="{{ route('admin.register') }}"> Sign Up</a></p>
