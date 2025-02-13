@@ -12,20 +12,21 @@
     <!-- begin app-wrap -->
     <div class="app-wrap">
         @include("Admin.menu.topmenu")
-        <!-- begin app-container -->
         <div class="app-container">
             @include("Admin.menu.leftmenu")
             <!-- begin app-main -->
             <div class="app-main" id="main">
-                @yield('content')
+                <!-- begin container-fluid -->
+                <div class="container-fluid">
+                    @yield('content')
+                </div>
+                <!-- end container-fluid -->
             </div>
             <!-- end app-main -->
         </div>
         <!-- end app-container -->
         <!-- begin footer -->
-        <footer class="footer">
-            @include("Admin.layout.footer")
-        </footer>
+        @include("Admin.layout.footer")
         <!-- end footer -->
     </div>
     <!-- end app-wrap -->
