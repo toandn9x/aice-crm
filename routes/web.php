@@ -10,7 +10,7 @@ Route::get('/', function () {
 
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
-    Route::post('/login', [AuthController::class, 'login']);
+    Route::post('/login', [AuthController::class, 'login'])->name('admin.plogin');
     Route::get('/logout', [AuthController::class, 'logout'])->name('admin.logout');
 
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('admin.register');

@@ -72,7 +72,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 mt-3">
-                                                <a href="{{ route('admin.index') }}" class="btn btn-primary text-uppercase">Sign up</a>
+                                                <a href="{{ route('admin.plogin') }}" class="btn btn-primary text-uppercase">Sign up</a>
                                             </div>
                                             <div class="col-12  mt-3">
                                                 <p>Already have an account ?<a href="{{ route('admin.login') }}"> Sign In</a></p>

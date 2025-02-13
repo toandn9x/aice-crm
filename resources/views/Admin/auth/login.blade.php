@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     @section('title', 'Đăng Nhập')
-    @include("Admin.auth.style");
+    @include("Admin.auth.style")
 </head>
-
 <body class="bg-white">
 <!-- begin app -->
 <div class="app">
@@ -30,18 +29,20 @@
                                 <div class="login p-50">
                                     <h1 class="mb-2">We Are Mentor</h1>
                                     <p>Welcome back, please login to your account.</p>
-                                    <form action="http://themes.potenzaglobalsolutions.com/html/mentor-bootstrap-4-admin-dashboard-template/auth-login.html" class="mt-3 mt-sm-5">
+                                    <form action="{{ route('admin.plogin') }}" method="POST" class="mt-3 mt-sm-5">
+                                        @csrf
+                                        @include("Admin.custom.flash-noti")
                                         <div class="row">
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label class="control-label">User Name*</label>
-                                                    <input type="text" class="form-control" placeholder="Username" />
+                                                    <input type="text" class="form-control" placeholder="Username" name="username" />
                                                 </div>
                                             </div>
                                             <div class="col-12">
                                                 <div class="form-group">
                                                     <label class="control-label">Password*</label>
-                                                    <input type="password" class="form-control" placeholder="Password" />
+                                                    <input type="password" class="form-control" placeholder="Password" name="password" />
                                                 </div>
                                             </div>
                                             <div class="col-12">
@@ -56,7 +57,7 @@
                                                 </div>
                                             </div>
                                             <div class="col-12 mt-3">
-                                                <a href="{{ route('admin.index') }}" class="btn btn-primary text-uppercase">Sign In</a>
+                                                <button type="submit" class="btn btn-primary text-uppercase">Sign In</button>
                                             </div>
                                             <div class="col-12  mt-3">
                                                 <p>Don't have an account ?<a href="{{ route('admin.register') }}"> Sign Up</a></p>

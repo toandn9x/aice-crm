@@ -16,16 +16,25 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
+        // Xác thực dữ liệu đầu vào
         $credentials = $request->validate([
-            'email' => 'required|email',
+            'username'    => 'required', // Có thể là email hoặc username
             'password' => 'required',
+        ], [
+            'username.required'    => 'Tên đăng nhập không được để trống.',
+            'password.required' => 'Mật khẩu không được để trống.',
         ]);
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.dashboard');
+        // Xác định login theo email hoặc username
+        $loginField = filter_var($credentials['username'], FILTER_VALIDATE_EMAIL) ? 'email' : 'username';
+
+        // Kiểm tra đăng nhập
+        if (Auth::attempt([$loginField => $credentials['username'], 'password' => $credentials['password']])) {
+            return redirect()->route('admin.index')->with('success', 'Đăng nhập thành công!');
         }
 
-        return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng']);
+        // Nếu sai, quay lại với thông báo lỗi
+        return back()->withErrors(['login' => 'Tên đăng nhập hoặc mật khẩu không chính xác.']);
     }
 
     public function logout()
