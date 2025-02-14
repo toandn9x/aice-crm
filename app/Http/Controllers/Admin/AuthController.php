@@ -40,7 +40,7 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.login')->with('success', 'Đăng xuất thành công!');
     }
 
     public function showRegisterForm()
@@ -50,15 +50,6 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
-        $credentials = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
 
-        if (Auth::attempt($credentials)) {
-            return redirect()->route('admin.dashboard');
-        }
-
-        return back()->withErrors(['email' => 'Email hoặc mật khẩu không đúng']);
     }
 }
