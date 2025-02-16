@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Customer;
 
 class CustomerController extends Controller
 {
@@ -55,5 +56,13 @@ class CustomerController extends Controller
         $customer->delete();
 
         return redirect()->route('customers.index')->with('success', 'Xóa khách hàng thành công.');
+    }
+
+    // tìm kiếm
+    public function gSearch() {
+        return view("Admin.search");
+    }
+    public function pSearch(Request $request) {
+        var_dump("aaaaaa"); die();
     }
 }

@@ -15,6 +15,8 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])->name('admin.plogin');
     Route::get('/register', [AuthController::class, 'showRegisterForm'])->name('admin.register');
     Route::post('/register', [AuthController::class, 'register']);
+
+    Route::get('/customers/search', [CustomerController::class, 'gSearch']);
 });
 
 // Nhóm route CẦN đăng nhập
@@ -28,5 +30,8 @@ Route::middleware(['auth', CheckSessionExpired::class])->prefix('admin')->group(
     Route::get('/api/customers/{id}', [CustomerController::class, 'get'])->name('customers.get'); // API JSON
     Route::post('/customers/update/{id}', [CustomerController::class, 'update'])->name('customers.update');
     Route::delete('/customers/delete/{id}', [CustomerController::class, 'delete'])->name('customers.delete');
+
+    Route::get('/customers/search', [CustomerController::class, 'gSearch'])->name('customers.gsearch');
+    Route::post('/customers/search/{tax}', [CustomerController::class, 'pSearch'])->name('customers.psearch');
 });
 
