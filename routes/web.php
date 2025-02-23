@@ -32,6 +32,6 @@ Route::middleware(['auth', CheckSessionExpired::class])->prefix('admin')->group(
     Route::delete('/customers/delete/{id}', [CustomerController::class, 'delete'])->name('customers.delete');
 
     Route::get('/customers/search', [CustomerController::class, 'gSearch'])->name('customers.gsearch');
-    Route::post('/customers/search/{tax}', [CustomerController::class, 'pSearch'])->name('customers.psearch');
+    Route::post('/customers/search', [CustomerController::class, 'pSearch'])->name('customers.psearch');
 });
 

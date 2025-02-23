@@ -10,9 +10,10 @@
                 </div>
             </div>
             <div class="card-body">
-                <form>
+                <form method="POST" action="{{ route('customers.psearch') }}">
+                    @csrf
                     <div class="form-group">
-                        <input type="text" class="form-control" id="tax" name="tax" placeholder="Nhập MST hoặc CMND">
+                        <input type="text" class="form-control" id="tax" name="tax" value="{{ old('tax', $tax ?? '') }}" placeholder="Nhập MST hoặc CMND">
                     </div>
                     <button type="submit" class="btn btn-primary">Tìm kiếm</button>
                 </form>
@@ -27,38 +28,52 @@
                 </div>
             </div>
             <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table mb-0">
-                        <thead class="thead-light">
-                            <tr>
-                                <th scope="col">#</th>
-                                <th scope="col">First</th>
-                                <th scope="col">Last</th>
-                                <th scope="col">Handle</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <th scope="row">1</th>
-                                <td>Mark</td>
-                                <td>Otto</td>
-                                <td>@mdo</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">2</th>
-                                <td>Jacob</td>
-                                <td>Thornton</td>
-                                <td>@fat</td>
-                            </tr>
-                            <tr>
-                                <th scope="row">3</th>
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <form method="POST" action="">
+                    @csrf
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Mã số thuế / CMND</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Địa chỉ</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Người đại diện</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Số điện thoại</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Ngày hoạt động</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Cơ quan thuế</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Loại hình DN</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                        </div>
+                    </div>
+                    
+                </form>
             </div>
         </div>
     </div>

@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Services\Helper;
 
 class CustomerController extends Controller
 {
+
     // Hiển thị danh sách khách hàng
     public function index()
     {
@@ -63,6 +65,24 @@ class CustomerController extends Controller
         return view("Admin.search");
     }
     public function pSearch(Request $request) {
-        var_dump("aaaaaa"); die();
+        if (Helper::isEmptyOrNull($request->tax)) {
+            return back()->with('error', 'Vui lòng nhập MST hoặc CMND để tìm kiếm khách hàng!');
+        }
+    
+        // Tìm trong DB
+        $customer = Customer::where('taxcode', $request->tax)->first();
+        if ($customer) {
+            return view('Admin.search', [
+                'customer' => $customer,
+                'tax' => $request->tax,
+            ]); // Không cần thông báo
+        }
+
+        // Tìm bằng API
+        $customer = Helper::getByTaxcode2($request->tax);
+        return view('Admin.search', [
+            'customer' => $customer,
+            'tax' => $request->tax,
+        ]);
     }
 }

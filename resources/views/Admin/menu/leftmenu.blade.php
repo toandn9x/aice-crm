@@ -25,7 +25,7 @@
             <li>
                 <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-comment"></i><span class="nav-title">QL khách hàng</span></a> 
                 <ul aria-expanded="false">
-                    <li> <a href="{{ route('customers.gsearch') }}">Tra cứu thông tin</a> </li>
+                    <li> <a href="{{ route('customers.gsearch') }}">Thêm khách hàng</a> </li>
                     <li> <a href='index-car-dealer.html'>Danh sách khách hàng</a> </li>
                 </ul>
             </li>
