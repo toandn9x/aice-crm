@@ -9,6 +9,12 @@ use App\Http\Middleware\CheckSessionExpired;
 Route::get('/', function () {
     return view('welcome');
 });
+
+// Thêm route mặc định login
+Route::get('/login', function () {
+    return redirect()->route('admin.login');
+})->name('login');
+
 // Nhóm route KHÔNG cần đăng nhập (login, logout)
 Route::prefix('admin')->group(function () {
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('admin.login');
