@@ -28,48 +28,82 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="POST" action="">
+                <form method="POST" action="{{ route('customers.create') }}">
                     @csrf
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Mã số thuế / CMND</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                            <input type="text" placeholder="Nhập MST/CMND" id="tax" name="tax" class="form-control autonumber" value="{{ $customer['mst'] ?? '' }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Tên doanh nghiệp</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="Nhập tên doanh nghiệp" id="name" name="name" class="form-control autonumber" value="{{ $customer['name'] ?? '' }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Địa chỉ</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                            <input type="text" placeholder="Nhập địa chỉ" id="address" name="address" class="form-control autonumber" value="{{ $customer['dia_chi'] ?? '' }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Người đại diện</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                            <input type="text" placeholder="Nhập người đại diện" id="representative" name="representative" class="form-control autonumber" value="{{ $customer['nguoi_dai_dien'] ?? '' }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Số điện thoại</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                            <input type="text" placeholder="Nhập số điện thoại" id="phone_number" name="phone_number" class="form-control autonumber" value="{{ $customer['sdt'] ?? '' }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Email</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="Nhập Email" id="email" name="email" class="form-control autonumber" value="{{ $customer['email'] ?? '' }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Ngày hoạt động</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                            <input type="date" placeholder="Chọn ngày hoạt động" id="operating_day" name="operating_day" class="form-control autonumber" value="{{ $customer['ngay_hoat_dong'] ?? '' }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Cơ quan thuế</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                            <input type="text" placeholder="Nhập cơ quan thế" id="tax_department" name="tax_department" class="form-control autonumber" value="{{ $customer['quan_ly_boi'] ?? '' }}">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Loại hình DN</label>
                         <div class="col-sm-10">
-                            <input type="text" placeholder="" id="Spanish" class="form-control autonumber" value="">
+                            <select class="form-control" placeholder="Chọn loại hình doanh nghiệp" id="type_of_business" name="type_of_business">
+                                <option value="1">Doanh nghiệp</option>
+                                <option value="2">Cá nhân</option>
+                                <option value="3">Cá nhân thuộc doanh nghiệp</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Ngành nghề chính</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="" id="main_profession" name="main_profession" class="form-control autonumber" value="{{ $customer['main_profession'] ?? '' }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label">Tình trạng</label>
+                        <div class="col-sm-10">
+                            <input type="text" placeholder="" id="status_of_business" name="status_of_business" class="form-control autonumber" value="{{ $customer['tinh_trang'] ?? '' }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label class="col-sm-2 col-form-label"></label>
+                        <div class="col-sm-10">
+                            <button type="submit" class="btn btn-primary">Thêm khách hàng</button>
                         </div>
                     </div>
                     

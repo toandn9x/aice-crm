@@ -63,6 +63,10 @@ class Helper // Tên class khớp với tên file
         $result = [];
 
         // Lấy từng thông tin
+        $thElements = $dom->getElementsByTagName('th');
+        $nameDirect = $thElements->item(0)->nodeValue;
+        $result["name"] = $nameDirect;
+        $result['loai_hinh_dn'] = 1;
         $trs = $dom->getElementsByTagName('tr');
         foreach ($trs as $tr) {
             $tds = $tr->getElementsByTagName('td');
@@ -97,11 +101,14 @@ class Helper // Tên class khớp với tên file
                     case 'Quản lý bởi':
                         $result['quan_ly_boi'] = $text;
                         break;
-                    case 'Loại hình DN':
-                        $result['loai_hinh_dn'] = $text;
+                    case 'Mã số thuế cá nhân':
+                        $result['loai_hinh_dn'] = 2;
                         break;
                     case 'Tình trạng':
                         $result['tinh_trang'] = $text;
+                        break;
+                    case 'Ngành nghề chính':
+                        $result['main_profession'] = $text;
                         break;
                 }
             }

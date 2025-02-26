@@ -3,9 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
-use App\Models\Customer;
 use App\Services\Helper;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use App\Models\Contact;
+use App\Models\Customer;
+use App\Models\CustomerAssign;
+use App\Models\CustomerInfo;
+use App\Models\User;
 
 class CustomerController extends Controller
 {
@@ -59,6 +64,55 @@ class CustomerController extends Controller
 
         return redirect()->route('customers.index')->with('success', 'Xóa khách hàng thành công.');
     }
+
+    // thêm khách hàng
+    public function create(Request $request) {
+        // validate
+        // create
+        $customer = new Customer();
+        if ($request->type_of_business == 1) $customer->taxcode = $request->tax;
+        else $customer->id_number =  $request->tax;
+        $customer->name = $request->name;
+        $customer->address = $request->address;
+        $customer->phone = $request->phone_number;
+        $customer->email = $request->email;
+        $customer->status = 1;
+        $customer->type = $request->type_of_business;
+        if($customer->save()) {
+            $customer_info = new CustomerInfo();
+            $customer_info->customer_id = $customer->id;
+            $customer_info->status = 1;
+            $customer_info->creator_id = Auth::user()->id;
+            $customer_info->creator_name = Auth::user()->name;
+            $customer_info->creator_email = Auth::user()->email;
+            $customer_info->representative = $request->representative;
+            $customer_info->operating_day = $request->operating_day;
+            $customer_info->tax_department = $request->tax_department;
+            $customer_info->main_profession = $request->main_profession;
+            $customer_info->status_of_business = $request->status_of_business;
+            $customer_info->save();
+            // lien hệ
+            $customer_contact = new Contact();
+            $customer_contact->customer_id = $customer->id;
+            $customer_contact->contact_id = Auth::user()->id;
+            $customer_contact->contact_name = Auth::user()->name;
+            $customer_contact->contact_email = Auth::user()->email;
+            $customer_contact->creator = Auth::user()->id;
+            $customer_contact->save();
+            // cham soc
+            $customer_assign = new CustomerAssign();
+            $customer_assign->customer_id = $customer->id;
+            $customer_assign->user_id = Auth::user()->id;
+            $customer_assign->role = 1;
+            $customer_assign->creator = Auth::user()->id;
+            $customer_assign->save();
+
+            return back()->with("success", "Tạo khách hàng thành công!");
+        } else {
+            return back()->with("error", "Tạo khách hàng thất bại!");
+        }
+    }
+
 
     // tìm kiếm
     public function gSearch() {
