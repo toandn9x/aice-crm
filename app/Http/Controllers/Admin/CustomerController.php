@@ -11,22 +11,24 @@ use App\Models\Customer;
 use App\Models\CustomerAssign;
 use App\Models\CustomerInfo;
 use App\Models\User;
+use Illuminate\Support\Facades\DB;
 
 class CustomerController extends Controller
 {
 
     // Hiển thị danh sách khách hàng
-    public function index()
+    public function list()
     {
-        $customers = Customer::all();
-        return view('customers.index', compact('customers'));
+        $customers = Customer::orderBy('id', 'desc')->get();
+        return view('Admin.list', ["customers" => $customers]);
     }
 
     // Hiển thị chi tiết một khách hàng
     public function show($id)
     {
         $customer = Customer::findOrFail($id);
-        return view('customers.show', compact('customer'));
+        $customer_info = CustomerInfo::where('customer_id', $id)->firstOrFail();
+        return view('Admin.customer-show', ["customer" => $customer, "customer_info" => $customer_info]);
     }
 
     // Lấy thông tin một khách hàng (API JSON)
@@ -42,18 +44,49 @@ class CustomerController extends Controller
     // Cập nhật thông tin khách hàng
     public function update(Request $request, $id)
     {
+        DB::beginTransaction();
+
+    try {
         $customer = Customer::findOrFail($id);
+        $customer_info = CustomerInfo::where('customer_id', $id)->firstOrFail();
 
-        $validated = $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|unique:customers,email,' . $id,
-            'phone' => 'nullable|string|max:20',
-            'address' => 'nullable|string|max:500',
-        ]);
+        // Cập nhật thông tin Customer
+        if ($request->type_of_business == 1) {
+            $customer->taxcode = $request->tax;
+        } else {
+            $customer->id_number = $request->tax;
+        }
+        $customer->name = $request->name;
+        $customer->address = $request->address;
+        $customer->phone = $request->phone_number;
+        $customer->email = $request->email;
+        $customer->status = 1;
+        $customer->type = $request->type_of_business;
 
-        $customer->update($validated);
+        // Lưu Customer
+        if ($customer->save()) {
+            // Cập nhật thông tin CustomerInfo
+            $customer_info->customer_id = $customer->id;
+            $customer_info->status = 1;
+            $customer_info->creator_id = Auth::user()->id;
+            $customer_info->creator_name = Auth::user()->name;
+            $customer_info->creator_email = Auth::user()->email;
+            $customer_info->representative = $request->representative;
+            $customer_info->operating_day = $request->operating_day;
+            $customer_info->tax_department = $request->tax_department;
+            $customer_info->main_profession = $request->main_profession;
+            $customer_info->status_of_business = $request->status_of_business;
+            $customer_info->save();
+        }
+        // Commit transaction nếu không có lỗi
+        DB::commit();
+        return back()->with('success', 'Cập nhật khách hàng thành công.');
 
-        return redirect()->route('customers.index')->with('success', 'Cập nhật khách hàng thành công.');
+    } catch (\Exception $e) {
+        // Rollback nếu có lỗi
+        DB::rollBack();
+        return back()->with('error', 'Có lỗi xảy ra khi cập nhật thông tin khách hàng!');
+        }
     }
 
     // Xóa khách hàng
@@ -62,7 +95,7 @@ class CustomerController extends Controller
         $customer = Customer::findOrFail($id);
         $customer->delete();
 
-        return redirect()->route('customers.index')->with('success', 'Xóa khách hàng thành công.');
+        return redirect()->route('Admin.index')->with('success', 'Xóa khách hàng thành công.');
     }
 
     // thêm khách hàng

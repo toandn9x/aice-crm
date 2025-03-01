@@ -4,7 +4,7 @@
     <div class="sidebar-nav scrollbar scroll_light">
         <ul class="metismenu " id="sidebarNav">
             <li class="nav-static-title">{{ Auth::user()->email }}</li>
-            <li class="active">
+            <li class="{{ Request::routeIs('admin.index') ? 'active' : '' }}">
                 <a href="{{ route('admin.index') }}" aria-expanded="false">
                     <i class="nav-icon ti ti-rocket"></i>
                     <span class="nav-title">Dashboards</span>
@@ -22,11 +22,11 @@
                     <li> <a href='index-crypto-currency.html'>Crypto Currency</a> </li>
                 </ul> -->
             </li>
-            <li>
+            <li class="{{ Request::routeIs('customers.*') ? 'active' : '' }}">
                 <a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-comment"></i><span class="nav-title">QL khách hàng</span></a> 
                 <ul aria-expanded="false">
-                    <li> <a href="{{ route('customers.gsearch') }}">Thêm khách hàng</a> </li>
-                    <li> <a href='index-car-dealer.html'>Danh sách khách hàng</a> </li>
+                    <li class="{{ Request::routeIs('customers.gsearch') ? 'active' : '' }}"> <a href="{{ route('customers.gsearch') }}">Thêm khách hàng</a> </li>
+                    <li class="{{ Request::routeIs('customers.list') ? 'active' : '' }}"> <a href="{{ route('customers.list') }}">Danh sách khách hàng</a> </li>
                 </ul>
             </li>
             <li><a class="has-arrow" href="javascript:void(0)" aria-expanded="false"><i class="nav-icon ti ti-calendar"></i><span class="nav-title">Calendar</span></a>

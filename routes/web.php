@@ -33,6 +33,9 @@ Route::middleware(['auth', CheckSessionExpired::class])->prefix('admin')->group(
 
     Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
     Route::post('/customers', [CustomerController::class, 'create'])->name('customers.create');
+
+    Route::get('/customers/list', [CustomerController::class, 'list'])->name('customers.list');
+    
     Route::get('/customers/{id}', [CustomerController::class, 'show'])->name('customers.show');
     Route::get('/api/customers/{id}', [CustomerController::class, 'get'])->name('customers.get'); // API JSON
     Route::post('/customers/update/{id}', [CustomerController::class, 'update'])->name('customers.update');
