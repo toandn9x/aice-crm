@@ -44,6 +44,7 @@ class CustomerController extends Controller
     // Cập nhật thông tin khách hàng
     public function update(Request $request, $id)
     {
+    
         DB::beginTransaction();
 
     try {

@@ -41,9 +41,6 @@
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
-    $(document).ready(function () {
-        bsCustomFileInput.init();
-    });
 </script>
 {{-- data table --}}
 <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap4.min.css">
@@ -51,6 +48,12 @@
 <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
 <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap4.min.js"></script>
 {{-- end data table --}}
+
+{{-- Sweetalert2 --}}
+<script src="assets/js/sweetalert2.js"></script>
+<script src="assets/js/confirmSubmit.js"></script>
+{{-- Sweetalert2 --}}
+
 @yield('script')
 </body>
 

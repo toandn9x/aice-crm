@@ -21,8 +21,8 @@
                 </div>
             </div>
             <div class="card-body">
-                <form method="POST" action="{{ route('customers.update', $customer->id) }}">
-                    <input type="hidden" name="_token" value="7DnUxprcAPcFbny2VLcKLskCEYAuR8FbO3ZCtasU" autocomplete="off">                    
+                <form id="customerForm" class="confirm-submit" method="POST" action="{{ route('customers.update', $customer->id) }}">
+                    @csrf                   
                     <div class="form-group row">
                         <label class="col-sm-2 col-form-label">Mã số thuế / CMND</label>
                         <div class="col-sm-10">
@@ -91,8 +91,8 @@
                         <label class="col-sm-2 col-form-label">Tình trạng</label>
                         <div class="col-sm-10">
                             <select class="form-control" placeholder="Cập nhật tình trạng" id="status_of_business" name="status_of_business">
-                                <option value="1" @selected($customer->status == 1)>Đang hoạt động</option>
-                                <option value="2" @selected($customer->status == 0)>Ngừng hoạt động</option>
+                                <option value="1" @selected($customer_info->status_of_business == 1)>Đang hoạt động</option>
+                                <option value="2" @selected($customer_info->status_of_business == 2)>Ngừng hoạt động</option>
                             </select>
                         </div>
                     </div>

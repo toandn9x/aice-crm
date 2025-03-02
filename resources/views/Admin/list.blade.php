@@ -91,19 +91,22 @@
                     previous: "Trước"
                 }
             },
-            columnDefs: [{ // Di chuyển columnDefs ra ngoài language
-                targets: 1, // Cột STT (cột đầu tiên)
-                searchable: false, // Không cho tìm kiếm cột STT
-                orderable: false, // Không sắp xếp cột STT
-                render: function(data, type, row, meta) {
-                    return meta.row + meta.settings._iDisplayStart + 1; // STT = số thứ tự hàng + offset trang
+            columnDefs: [
+                {
+                    targets: 0, // Cột MST/CMND
+                    searchable: false, // Không cho tìm kiếm cột này
+                    orderable: false // Không cho sắp xếp cột này
                 },
                 {
-                targets: 0, // Cột STT (cột đầu tiên)
-                searchable: false, // Không cho tìm kiếm cột STT
-                orderable: false, // Không sắp xếp cột STT
+                    targets: 1, // Cột STT
+                    searchable: false, // Không cho tìm kiếm cột STT
+                    orderable: false, // Không cho sắp xếp cột STT
+                    render: function(data, type, row, meta) {
+                        return meta.row + meta.settings._iDisplayStart + 1; // STT = số thứ tự hàng + offset trang
+                    }
                 }
-            }],
+            ],
+            responsive: true,
         });
     });
 </script>
